@@ -8,7 +8,7 @@ app.use(express.json());
 // Swagger
 const { swaggerUi, swaggerSpec } = require("./config/swagger");
 
-app.use(passport.initialize());
+
 
 const path = require("path");
 const cors = require("cors")
