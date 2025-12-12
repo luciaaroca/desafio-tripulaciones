@@ -1,8 +1,10 @@
 const express = require("express");
 const cowsay = require("cowsay");
+const helmet = require("helmet");
 
 const app = express(); // Creando el servidor
 app.use(express.json());
+app.use(helmet());
 
 
 // Swagger
@@ -57,7 +59,7 @@ app.listen(port, () => {
   console.log(`Servidor funcionando en puerto ${port}`);
   console.log(
     cowsay.say({
-      text: `Tattoo App funcionando en http://localhost:${port}/api`,
+      text: `App funcionando en http://localhost:${port}/api`,
       f: "owl",
     })
   );
