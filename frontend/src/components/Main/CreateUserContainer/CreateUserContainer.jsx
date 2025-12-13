@@ -1,12 +1,12 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
 import CreateUserForm from "./CreateUserForm/CreateUserForm"
-
+import './CreateUserContainer.css';
 
 const CreateUserContainer = () => {
   
   return <section className="createUser">
-    <h2>Create a new User</h2>
+    <h1>Create a New User</h1>
       < CreateUserForm/>
   </section>
 };

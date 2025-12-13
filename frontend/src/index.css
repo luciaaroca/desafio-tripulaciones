@@ -21,9 +21,31 @@ button {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    background-color:rgb(34, 63, 88);
+    color: white;
     
 
 }
 button:hover{
     transform: translateY(-2px);
 }
+
+h1{
+    color:rgb(34, 63, 88);
+    font-size: 35px;
+}
+input{
+  flex: 1; /* ocupa todo el espacio disponible */
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+
