@@ -1,5 +1,5 @@
-const { interpretQuestion } = require("../services/openaiService");
-const { executeQuery } = require("../services/queryService");
+const { interpretQuestion } = require("../services/openAiService.js");
+const { executeQuery } = require("../services/queryService.js");
 
 const sendMessage = async (req, res) => {
   try {
