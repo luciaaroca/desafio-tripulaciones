@@ -5,23 +5,19 @@ module.exports = {
     login: async (req, res) => {
         try {
             const { email, password } = req.body;
-
             if (!email || !password) {
                 return res.status(400).json({
                     success: false,
                     message: 'Email y contraseña son requeridos'
                 });
             }
-
             const userResult = await Auth.login(email, password);
-
             if (userResult.length === 0) {
                 return res.status(401).json({
                     success: false,
                     message: 'Credenciales inválidas'
                 });
             }
-
             const user = userResult[0];
 
             const accessToken = createAccessToken({
@@ -58,7 +54,6 @@ module.exports = {
                     surname: user.surname || ''
                 }
             });
-
         } catch (err) {
             console.error('Error en login:', err);
             return res.status(500).json({
@@ -169,7 +164,6 @@ module.exports = {
             });
         }
     },
-
     logout: (req, res) => {
         res.clearCookie('refresh_token', {
             httpOnly: true,

@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const morgan = require("./middlewares/morgan");
 const error404 = require("./middlewares/error404");
 require("dotenv").config();
-
 const app = express();
 
 // Cookie Parser
@@ -48,7 +47,6 @@ const adminRoutes = require("./routes/adminRoutes");
 const hrRoutes = require("./routes/hrRoutes");
 const mktRoutes = require("./routes/mktRoutes");
 const chatRoutes = require("./routes/chatRoutes");
-
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/hr", hrRoutes);
@@ -70,7 +68,6 @@ app.get("/api", (req, res) => {
 //Producción (React build)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
   app.get("*", (req, res) => {
     res.sendFile(
       path.join(__dirname, "../frontend/dist", "index.html")
@@ -80,10 +77,8 @@ if (process.env.NODE_ENV === "production") {
 
 // Manejo de rutas no encontradas
 app.use(error404);
-
 // Iniciar el servidor
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
   console.log(`Servidor funcionando en puerto ${port}`);
   console.log(

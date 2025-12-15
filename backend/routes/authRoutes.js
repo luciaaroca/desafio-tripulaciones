@@ -11,6 +11,10 @@ router.post('/login', loginValidator, handleValidationErrors, authController.log
 // POST http://localhost:3000/auth/refresh
 router.post('/refresh', authController.refreshToken);
 
+// POST http://localhost:3000/api/auth/login
+router.post('/login', loginValidator, handleValidationErrors, authController.login);
+// POST http://localhost:3000/auth/refresh
+router.post('/refresh', authController.refreshToken);
 // POST http://localhost:3000/auth/logout
 router.post('/logout', authMiddleware.authenticate, authController.logout);
 
