@@ -1,7 +1,10 @@
 const { body, param } = require('express-validator');
+
 const validRoles = ['admin', 'hr', 'mkt'];
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,16}$/;
+
 exports.createUserValidator = [
   body('role')
     .notEmpty().withMessage('El rol es obligatorio')
@@ -15,6 +18,7 @@ exports.createUserValidator = [
     .matches(passwordRegex)
     .withMessage('La contraseña debe tener 8-16 caracteres, incluir mayúscula, minúscula y un número')
 ];
+
 exports.updateUserValidator = [
   param('user_id')
     .isInt().withMessage('ID de usuario inválido'),

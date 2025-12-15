@@ -1,5 +1,6 @@
 const Auth = require('../models/authModel');
-const { createAccessToken, createRefreshToken, verifyRefreshToken } = require('../config/jsonwebtoken');
+const { createAccessToken, createRefreshToken, verifyRefreshToken } = require('../config/jsonwebtoken'); 
+
 module.exports = {
     login: async (req, res) => {
         try {
@@ -18,6 +19,7 @@ module.exports = {
                 });
             }
             const user = userResult[0];
+
             const accessToken = createAccessToken({
                 user_id: user.user_id,
                 role: user.role,
@@ -25,11 +27,13 @@ module.exports = {
                 name: user.name || '',
                 surname: user.surname || ''
             });
+
             const refreshToken = createRefreshToken({
                 user_id: user.user_id,
                 email: user.email,
                 role: user.role
             });
+
             res.cookie('refresh_token', refreshToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
@@ -37,6 +41,7 @@ module.exports = {
                 maxAge: 7 * 24 * 60 * 60 * 1000,
                 path: '/api'
             });
+            
             return res.status(200).json({
                 success: true,
                 accessToken,
@@ -58,9 +63,11 @@ module.exports = {
             });
         }
     },
+
     refreshToken: async (req, res) => {
         try {
             const refreshToken = req.cookies.refresh_token;
+            
             if (!refreshToken) {
                 return res.status(401).json({
                     success: false,
@@ -68,7 +75,9 @@ module.exports = {
                     code: 'REFRESH_TOKEN_REQUIRED'
                 });
             }
+            
             let decoded;
+            
             try {
                 decoded = verifyRefreshToken(refreshToken);
             } catch (error) {
@@ -79,19 +88,23 @@ module.exports = {
                         sameSite: 'strict',
                         path: '/api'
                     });
+                    
                     return res.status(401).json({
                         success: false,
                         message: 'Sesión expirada. Por favor inicie sesión nuevamente.',
                         code: 'SESSION_EXPIRED'
                     });
                 }
+                
                 return res.status(401).json({
                     success: false,
                     message: 'Refresh token inválido',
                     code: 'INVALID_REFRESH_TOKEN'
                 });
             }
+            
             const userResult = await Auth.getUserById(decoded.user_id);
+            
             if (userResult.length === 0) {
                 res.clearCookie('refresh_token', {
                     httpOnly: true,
@@ -105,7 +118,9 @@ module.exports = {
                     code: 'USER_NOT_FOUND'
                 });
             }
+            
             const user = userResult[0];
+            
             const newAccessToken = createAccessToken({
                 user_id: user.user_id,
                 role: user.role,
@@ -113,11 +128,13 @@ module.exports = {
                 name: user.name || '',
                 surname: user.surname || ''
             });
+            
             const newRefreshToken = createRefreshToken({
                 user_id: user.user_id,
                 email: user.email,
                 role: user.role
             });
+            
             res.cookie('refresh_token', newRefreshToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
@@ -125,6 +142,7 @@ module.exports = {
                 maxAge: 7 * 24 * 60 * 60 * 1000,
                 path: '/api'
             });
+            
             return res.json({
                 success: true,
                 accessToken: newAccessToken,
@@ -137,6 +155,7 @@ module.exports = {
                     surname: user.surname || ''
                 }
             });
+            
         } catch (error) {
             console.error('Error en refresh token:', error);
             return res.status(500).json({
@@ -152,6 +171,7 @@ module.exports = {
             sameSite: 'strict',
             path: '/api'
         });
+        
         return res.json({
             success: true,
             message: 'Sesión cerrada exitosamente.'
