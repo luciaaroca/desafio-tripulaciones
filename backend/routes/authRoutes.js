@@ -18,14 +18,44 @@ const loginLimiter = rateLimit({
 // POST http://localhost:3000/api/auth/login
 router.post('/login',loginLimiter, loginValidator, handleValidationErrors , authController.login);
 
-// POST http://localhost:3000/auth/refresh
+/**
+ * @swagger
+ * /api/auth/refresh:
+ *   post:
+ *     summary: Refrescar token de acceso
+ *     tags: [Autenticación]
+ *     responses:
+ *       200:
+ *         description: Nuevo token generado exitosamente
+ *         headers:
+ *           X-New-Access-Token:
+ *             schema:
+ *               type: string
+ *             description: Nuevo token de acceso en la cabecera
+ *       401:
+ *         description: Refresh token inválido o expirado
+ */
 router.post('/refresh', authController.refreshToken);
 
-// POST http://localhost:3000/api/auth/login
-router.post('/login', loginValidator, handleValidationErrors, authController.login);
-// POST http://localhost:3000/auth/refresh
-router.post('/refresh', authController.refreshToken);
-// POST http://localhost:3000/auth/logout
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Cerrar sesión
+ *     tags: [Autenticación]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Sesión cerrada exitosamente
+ *         headers:
+ *           Set-Cookie:
+ *             schema:
+ *               type: string
+ *             description: Cookie de refresh token eliminada
+ *       401:
+ *         description: No autorizado
+ */
 router.post('/logout', authMiddleware.authenticate, authController.logout);
 
 module.exports = router;
