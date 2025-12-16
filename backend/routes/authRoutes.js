@@ -5,69 +5,18 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const { loginValidator } = require('../validators/authValidator.js');
 const handleValidationErrors = require('../middlewares/validate.js');
 
-/**
- * @swagger
- * tags:
- *   name: Autenticación
- *   description: Endpoints de login, logout y gestión de tokens
- */
+//CIBERSEGURIDAD-------
+const rateLimit = require('express-rate-limit');
+// Límite para login
+const loginLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutos
+  max: 5, // máximo 5 intentos
+  message: 'Demasiados intentos de login, intenta más tarde.'
+});
+//---------------------
 
-/**
- * @swagger
- * /api/auth/login:
- *   post:
- *     summary: Iniciar sesión
- *     tags: [Autenticación]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *                 example: admin@empresa.com
- *               password:
- *                 type: string
- *                 format: password
- *                 example: admin123
- *     responses:
- *       200:
- *         description: Login exitoso
- *         headers:
- *           Set-Cookie:
- *             schema:
- *               type: string
- *             description: Cookie con refresh token
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 accessToken:
- *                   type: string
- *                 user:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: integer
- *                     email:
- *                       type: string
- *                     name:
- *                       type: string
- *                     role:
- *                       type: string
- *       400:
- *         description: Datos de entrada inválidos
- *       401:
- *         description: Credenciales incorrectas
- */
-router.post('/login', loginValidator, handleValidationErrors, authController.login);
+// POST http://localhost:3000/api/auth/login
+router.post('/login',loginLimiter, loginValidator, handleValidationErrors , authController.login);
 
 /**
  * @swagger

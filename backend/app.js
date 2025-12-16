@@ -1,3 +1,4 @@
+
 const express = require("express");
 const crypto = require('crypto');
 const cowsay = require("cowsay");
@@ -7,8 +8,19 @@ const path = require("path");
 const cookieParser = require('cookie-parser'); 
 const morgan = require("./middlewares/morgan");
 const error404 = require("./middlewares/error404");
-require("dotenv").config();
 const app = express();
+require("dotenv").config();
+
+const rateLimit = require("express-rate-limit");//Ciberseguridad
+const timeout = require("connect-timeout");//Ciberseguridad
+
+app.use(helmet({ //Ciberseguridad
+  contentSecurityPolicy: false, // Ajustar si React rompe CSP
+  crossOriginEmbedderPolicy: false,
+  xssFilter: true,
+  frameguard: { action: 'deny' },
+  noSniff: true
+}));
 
 // Cookie Parser
 app.use(cookieParser());
@@ -20,21 +32,32 @@ app.use(cors({
   exposedHeaders: ['X-New-Access-Token'] 
 }));
 
-// Configuración de seguridad para cookies
-app.use((req, res, next) => {
-  // Headers de seguridad adicionales
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  next();
-});
+// // Configuración de seguridad para cookies -> ---------Esto ya configurado con helmet
+// app.use((req, res, next) => {
+//   // Headers de seguridad adicionales
+//   res.setHeader('X-Content-Type-Options', 'nosniff');
+//   res.setHeader('X-Frame-Options', 'DENY');
+//   res.setHeader('X-XSS-Protection', '1; mode=block');
+//   next();
+// });
 
 // Middlewares 
 app.use(express.json());
-app.use(helmet({
-  contentSecurityPolicy: false, 
-  crossOriginEmbedderPolicy: false
-}));
+// Timeout- //Ciberseguridad
+app.use(timeout('10s'));
+app.use((req, res, next) => {
+  if (!req.timedout) next();
+});
+
+// Rate limiting
+//Ciberseguridad
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 100, // Max 100 requests por IP
+  message: 'Demasiadas solicitudes, intenta más tarde.'
+});
+app.use(limiter); //Ciberseguridad
+
 app.use(morgan(':method :url :status :param[id] - :response-time ms :body'));
 
 //Swagger
