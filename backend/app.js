@@ -1,3 +1,4 @@
+
 const express = require("express");
 const crypto = require('crypto');
 const cowsay = require("cowsay");
@@ -7,8 +8,8 @@ const path = require("path");
 const cookieParser = require('cookie-parser'); 
 const morgan = require("./middlewares/morgan");
 const error404 = require("./middlewares/error404");
-require("dotenv").config();
 const app = express();
+require("dotenv").config();
 
 // Cookie Parser
 app.use(cookieParser());
