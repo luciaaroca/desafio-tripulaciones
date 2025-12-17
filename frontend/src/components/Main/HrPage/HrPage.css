@@ -13,7 +13,11 @@
   gap: 0.5rem;
   margin-bottom: 2rem;
 }
-
+.page-header > div {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 .page-header h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -27,7 +31,7 @@
 
 /* ===== HEADER BUTTONS ===== */
 .page-header button {
-  width: fit-content;
+  width: 300px;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   border: none;
@@ -36,6 +40,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s ease;
+  
 }
 
 .page-header button:hover {
@@ -88,6 +93,7 @@
   background-color: #f8fafc;
 }
 
+
 /* ===== ACTION BUTTON ===== */
 .hr-table button {
   background-color: #dc2626;
@@ -102,7 +108,6 @@
 .hr-table button:hover {
   background-color: #b91c1c;
 }
-
 /* ===== EMPTY STATE ===== */
 .hr-table td[colspan] {
   text-align: center;
@@ -115,11 +120,21 @@
   .hr-table thead {
     display: none;
   }
+ .hr-table td {
+  display: flex;
+  justify-content: flex-start; /* 👈 CLAVE */
+  align-items: center;
+  gap: 0.75rem;
+}
+ 
 
+  .hr-table td[data-label="Acciones"] button {
+    width: 100%;
+  }
   .hr-table,
   .hr-table tbody,
   .hr-table tr,
-  .hr-table td {
+  .hr-table  {
     display: block;
     width: 100%;
   }
@@ -131,11 +146,7 @@
     padding: 0.5rem;
   }
 
-  .hr-table td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-  }
+ 
 
   .hr-table td::before {
     content: attr(data-label);

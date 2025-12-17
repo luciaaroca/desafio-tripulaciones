@@ -152,7 +152,6 @@ const queries = {
    */
   createEmployee: `
     INSERT INTO employees (
-      employee_id, 
       first_name, 
       last_name,
       email,
@@ -160,7 +159,7 @@ const queries = {
       department, 
       salary
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING 
       employee_id,
       first_name,
