@@ -13,6 +13,7 @@ import {
   LabelList
 } from "recharts";
 import Pagination from "../../../Pagination/Pagination";
+import './ProductsList.css'
 
 const LIMIT = 10;
 
