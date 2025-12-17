@@ -101,7 +101,7 @@ const HrPage = () => {
         <h1>Recursos Humanos</h1>
         <p>Gestión de empleados</p>
 
-        <div style={{ marginTop: "1rem" }}>
+        <div style={{ marginTop: "1rem" }} className="buttonsTable">
           <button onClick={() => setView("list")}>
             📋 Ver empleados
           </button>
@@ -133,11 +133,11 @@ const HrPage = () => {
             ) : (
               employees.map((emp) => (
                 <tr key={emp.employee_id}>
-                  <td>{emp.first_name} {emp.last_name}</td>
-                  <td>{emp.email}</td>
-                  <td>{emp.department}</td>
-                  <td>{emp.position}</td>
-                  <td>
+                  <td data-label="Nombre">{emp.first_name} {emp.last_name}</td>
+                  <td data-label="Email">{emp.email}</td>
+                  <td data-label="Departamento">{emp.department}</td>
+                  <td data-label="Puesto">{emp.position}</td>
+                  <td data-label="Acciones">
                     <button onClick={() => handleDelete(emp.employee_id)}>
                       Eliminar
                     </button>

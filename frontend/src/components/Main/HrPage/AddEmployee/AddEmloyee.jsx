@@ -87,7 +87,7 @@ const AddEmployee = ({ onSuccess, onCancel }) => {
         background: "#1f2937",
         color: "#f9fafb",
         width: "90%",
-        maxWidth: "400px",
+        
       }).then(() => {
         onSuccess(); // vuelve al listado + refresca
       });

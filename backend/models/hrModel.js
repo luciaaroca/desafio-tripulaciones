@@ -130,15 +130,15 @@ const getEmployeeByName = async (first_name) => {
  * // Retorna: {message: 'Empleado creado exitosamente', employee: {...}}
  */
 const createEmployee = async (employeeData) => {
-  const { employee_id, first_name, last_name, email, position, department, salary } = employeeData;
+  const { first_name, last_name, email, position, department, salary } = employeeData;
   
   try {
-    if (!employee_id || !first_name || !last_name || !email || !position || !department || !salary) {
+    if (!first_name || !last_name || !email || !position || !department || !salary) {
       throw new Error('Todos los campos son requeridos (employee_id, first_name, last_name, email, position, department, salary)');
     }
     
     const result = await pool.query(queries.createEmployee, [
-      employee_id,
+     
       first_name.toLowerCase(),
       last_name.toLowerCase(),
       email.toLowerCase(),  
