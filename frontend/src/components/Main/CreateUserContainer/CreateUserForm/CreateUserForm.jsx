@@ -2,6 +2,7 @@ import React , {useState} from "react";
 import { Link } from 'react-router-dom'
 import {createUser} from "../../../../services/adminServices"
 import './CreateUserForm.css';
+import Swal from 'sweetalert2';
 
 const CreateUserForm = () => {
   const [userData, setUserData] = useState({ email:'', role: '', password: '' });
@@ -14,7 +15,7 @@ const CreateUserForm = () => {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-   console.log("Submit fired", userData); // <- aquí
+   console.log("Submit fired", userData); 
   //Regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //no espacios/ unico @
   const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,16}$/; //al menos(1numeros + 1mayusc + 1minusc)(8-16 caract)
@@ -29,11 +30,19 @@ const CreateUserForm = () => {
   try {
       const res = await createUser (userData); 
      
-      alert(res.msg || "User created successfully!");
+      Swal.fire({
+      icon: 'success',
+      title: 'Usuario creado',
+      text: res.msg || 'Usuario creado con éxtito!',
+    });
       setUserData({ email: '', role: '', password: '' });
       setMsg(''); // opcional: limpiar mensaje de error
   } catch (error) {
-        setMsg(error.msg || 'Error creating user');
+      Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: error.msg || 'Error creating user',
+    });
       }
   }
   return <form onSubmit={handleSubmit} className="userForm">

@@ -10,6 +10,7 @@
     padding: 24px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 100px;
 }
 .userForm input,
 .userForm select {
@@ -24,5 +25,23 @@
   outline: none;
 }
 .userForm a{
-  color: white
+  color: white;
+  text-decoration: none;
+}
+
+.userForm button{
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 8px;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.userForm button:hover {
+  background-color: #b91c1c;
+  transform: scale(1.05); /* pequeño aumento de tamaño */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* sombra sutil */
 }
