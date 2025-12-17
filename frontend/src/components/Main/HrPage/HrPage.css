@@ -31,7 +31,7 @@
   padding: 0.5rem 1rem;
   border-radius: 6px;
   border: none;
-  background-color: #2563eb;
+  background-color: #000000;
   color: white;
   font-weight: 500;
   cursor: pointer;
@@ -39,15 +39,15 @@
 }
 
 .page-header button:hover {
-  background-color: #1d4ed8;
+  background-color: #717171;
 }
 
 .page-header button:last-child {
-  background-color: #16a34a;
+  background-color: #000000;
 }
 
 .page-header button:last-child:hover {
-  background-color: #15803d;
+  background-color: #717171;
 }
 
 /* ===== TABLE ===== */
@@ -61,7 +61,7 @@
 }
 
 .hr-table thead {
-  background-color: #f1f5f9;
+  background-color: #000000;
 }
 
 .hr-table th,
@@ -73,7 +73,7 @@
 .hr-table th {
   font-size: 0.9rem;
   text-transform: uppercase;
-  color: #475569;
+  color: #ffffff;
 }
 
 .hr-table tr {

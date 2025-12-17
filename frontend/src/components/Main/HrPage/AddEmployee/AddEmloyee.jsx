@@ -130,7 +130,7 @@ const AddEmployee = ({ onSuccess, onCancel }) => {
 
         <div style={{ marginTop: "1rem" }}>
           <button type="submit" disabled={loading}>
-            {loading ? "Guardando..." : "💾 Guardar"}
+            {loading ? "Guardando..." : "Guardar"}
           </button>
 
           <button
@@ -138,7 +138,7 @@ const AddEmployee = ({ onSuccess, onCancel }) => {
             onClick={onCancel}
             style={{ marginLeft: "1rem" }}
           >
-            ❌ Cancelar
+            Cancelar
           </button>
         </div>
       </form>

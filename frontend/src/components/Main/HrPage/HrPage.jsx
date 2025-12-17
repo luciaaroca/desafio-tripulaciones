@@ -83,7 +83,7 @@ const HrPage = () => {
                   <td>{emp.position}</td>
                   <td>
                     <button onClick={() => handleDelete(emp.employee_id)}>
-                      🗑 Eliminar
+                      Eliminar
                     </button>
                   </td>
                 </tr>

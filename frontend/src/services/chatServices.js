@@ -1,17 +1,16 @@
-import apiChat from "./api";
+import api from "./api";
 
-// POST /api/query
+// POST /api/chat/message
 export const sendChatMessage = async (payload) => {
   try {
-    // 🔹 Convertimos cualquier input a formato MCP
-    const body = {
-      pregunta: typeof payload === "string"
-        ? payload
-        : payload?.message || payload?.pregunta
-    };
+    // 🔹 Si viene un string → lo convertimos
+    const body =
+      typeof payload === "string"
+        ? { message: payload }
+        : payload;
 
-    const response = await apiChat.post(
-      "/api/query",
+    const response = await api.post(
+      "chat/message",
       body
     );
 
@@ -22,4 +21,3 @@ export const sendChatMessage = async (payload) => {
     };
   }
 };
-

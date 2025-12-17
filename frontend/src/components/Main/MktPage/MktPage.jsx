@@ -4,7 +4,7 @@ import SalesChart from "../../Main/MktPage/SalesChart/SalesChart";
 import CustomersList from "../../Main/MktPage/CustomersList/CustomersList";
 import ProductsList from "../../Main/MktPage/ProductsList/ProductsList";
 import "./MktPage.css";
-import ChatBox from "../../Chat/Chatbox/Chatbox";
+import ChatBox2 from "../../Chat/Chatbox/Chatbox2";
 
 
 const MktPage = () => {
@@ -32,7 +32,7 @@ const MktPage = () => {
 )}
       <CustomersList />
       <ProductsList />
-      <ChatBox />
+      <ChatBox2 />
 
     </section>
   );
