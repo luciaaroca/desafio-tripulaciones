@@ -27,7 +27,7 @@ const AdminDashboard = () => {
         </Link>
 
       </div>
-
+       <ChatBox2 />
     </section>
   );
 };
