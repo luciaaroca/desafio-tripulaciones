@@ -10,7 +10,7 @@ const AdminDashboard = () => {
       </header>
 
       <p className="adminSubtitle">
-        Gestión interna de MediaMarkt
+        Gestión interna de Globomarket
       </p>
 
       <div className="adminGrid">
@@ -24,15 +24,15 @@ const AdminDashboard = () => {
           <p>Crear nuevos empleados y asignar roles</p>
         </Link>
 
-        <div className="adminCard disabled">
+        <Link to="/mkt" className="adminCard">
           <h2>📣 Marketing</h2>
           <p>Campañas y comunicación interna</p>
-        </div>
+          </Link>
 
-        <div className="adminCard disabled">
+        <Link to="/hr" className="adminCard">
           <h2>🧑‍💼 Recursos Humanos</h2>
           <p>Gestión de personal y formación</p>
-        </div>
+        </Link>
       </div>
     </section>
   );

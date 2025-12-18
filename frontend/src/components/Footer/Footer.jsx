@@ -3,7 +3,7 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>© {new Date().getFullYear()} MediaMarkt · Intranet Corporativa</p>
+      <p>© {new Date().getFullYear()} Globomarket · Intranet Corporativa</p>
     </footer>
   );
 };

@@ -70,27 +70,60 @@ La aplicación sigue una **arquitectura Cliente-Servidor**, separando claramente
 
 ---
 
-## 📂 Estructura del Proyecto (Ejemplo)
+## 📂 Estructura del Proyecto 
 
 ```bash
-├── frontend/
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-│
-├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middlewares/
-│   └── app.js
-│
-├── catbox-api/
-│   ├── app.py
-│   ├── services/
-│   ├── llm/
-│   └── mcp/
-│
-└── database/
-    └── schema.sql
+backend/
+│   app.js
+├── config/
+│ └── db.js
+│ └── jsonwebtoken.js
+│ └── swagger.js
+├── controllers/
+│ └── authController.js
+│ └── adminController.js
+│ └── chatController.js
+│ └── hrController.js
+│ └── mktController.js
+├── middlewares/
+│ └── checkRefreshCookie.js
+│ └── auth.middleware.js
+│ └── error404.js
+│ └── morgan.js
+│ └── validate.js
+├── models/
+│ └── adminModel.js
+│ └── authModel.js
+│ └── hrModel.js
+│ └── mktModel.js
+├── routes/
+│ └── adminRoutes.js
+│ └── authRoutes.js
+│ └── chatRoutes.js
+│ └── hrRoutes.js
+│ └── mktRoutes.js
+├── queries/
+├── validators/
+│ 
+frontend/
+│   index.html
+├── public/
+├── src/
+│ └── components
+│        └── Chat
+│        └── Footer
+│        └── Header
+│        └── Layout
+│        └── Main
+│               └── AdminDashboard
+│               └── AllUsers
+│               └── CreateUserContainer
+│               └── HrPage
+│               └── MktPage
+│               └── Login
+│               └── Splash
+│        └── Pagination
+│ └── services
+
+
+

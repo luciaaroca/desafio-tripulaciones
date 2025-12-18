@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const role = localStorage.getItem("role");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
+      {/* Logo */}
       <div className="navbar-left">
         <img
           src="/logo_globomarket_white.png"
@@ -21,15 +23,27 @@ const Navbar = () => {
         />
       </div>
 
-      <ul className="navbar-links">
-        {role === "admin" && <li><Link to="/admin">Admin</Link></li>}
-        {role === "mkt" && <li><Link to="/mkt">Marketing</Link></li>}
-        {role === "hr" && <li><Link to="/hr">RRHH</Link></li>}
-      </ul>
-
-      <button className="logoutBtn" onClick={handleLogout}>
+      {/* Logout escritorio */}
+      <button className="logoutBtn desktop" onClick={handleLogout}>
         Cerrar sesión
       </button>
+
+      {/* Botón hamburguesa */}
+      <button
+        className="menu-btn"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        ☰
+      </button>
+
+      {/* Menú móvil */}
+      {menuOpen && (
+        <div className="mobile-menu">
+          <div className="mobile-item logout-item" onClick={handleLogout}>
+            Cerrar sesión
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
